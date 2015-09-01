@@ -1,0 +1,51 @@
+<!doctype html>
+<!--
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<html>
+<head>
+
+  <title>iron-ajax</title>
+
+  <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="/bower_components/iron-ajax/iron-ajax.html">
+  <link rel="import" href="/bower_components/iron-image/iron-image.html">
+  <link rel="import" href="/bower_components/paper-styles/classes/typography.html">
+  <link rel="import" href="/bower_components/iron-flex-layout/classes/iron-flex-layout.html">
+  <link rel="stylesheet" href="/bower_components/paper-styles/demo.css">
+  <style>
+    iron-image {
+      background-color: lightgray;
+      margin: 1em;
+    }
+  </style>
+</head>
+<body>
+
+  <template is="dom-bind">
+    <iron-ajax auto url="/views/iron-ajax.html"
+        params='{"alt":"json", "q":"polymer"}'
+        handle-as="json" last-response="{{ajaxResponse}}"
+        method="POST"  iron-ajax>
+    <h1>Video Feed</h1>
+    <span>[[ajaxResponse]]</span>
+    <!--<section class="flex layout horizontal wrap">
+      <template is="dom-repeat" items="[[ajaxResponse.feed.entry]]">
+        <a href="[[item.link.0.href]]" target="_blank">
+          <iron-image src="[[item.media$group.media$thumbnail.0.url]]" width="256" height="256" sizing="cover" preload fade></iron-image>
+        </a>
+      </template>
+    </section>-->
+  </template>
+<script>
+  Polymer({
+    is: 'iron-ajax'
+  });
+</script>
+</body>
+</html>

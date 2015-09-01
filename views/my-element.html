@@ -1,0 +1,31 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<dom-module id="my-element">
+<template>
+Name:<input is="iron-input" bind-value="{{name}}" /><br/>
+Age:<input is="iron-input" bind-value="{{age}}" /><br/>
+你输入的Name是:<span>[[name]]</span>Age是:<span>[[age]]</span>
+</template>
+</dom-module>
+<script>
+	Polymer({
+		is: "my-element",
+		properties: {
+			name: {
+				type: String,
+				notify: true,
+				observer: '_nameChanged'
+			},
+			age:{
+				type:Number,
+				observer: '_ageChanged'
+			}
+			
+		},
+		_nameChanged:function(oldname,newname){
+			console.log(arguments);
+		},
+		_ageChanged:function(oldage,newage){
+			console.log(arguments);
+		}
+	});
+</script>

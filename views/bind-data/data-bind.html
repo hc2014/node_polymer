@@ -1,0 +1,125 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/iron-input/iron-input.html">
+<link rel="import" href="/views/bind-data/my-element.html">
+<link rel="import" href="/views/bind-data/my-user.html">
+<dom-module id="data-bind">
+	<template>
+		name:
+		<input is="iron-input" bind-value="[[name]]" />
+		<br /> name:
+		<input is="iron-input" bind-value="{{name}}" />
+		<br /> age:
+		<input value="{{age::input}}">
+		<br /> sex:
+		<input value="{{sex::input}}">
+		<br /> sex:
+		<input is="iron-input" bind-value="{{sex}}">
+		<br /> interest:
+		<input is="iron-input" bind-value="{{interest}}" />
+		<br /> interest:
+		<input value="{{interest::input}}" />
+		<br /> interest:
+		<span>[[interest]]</span>
+		<br /> my name is <span>{{name}}</span>,and age is <span>{{age}}</span>,and sex is <span>{{sex}}</span>
+		<br /> I like <span>{{interest}}</span>
+		<br />
+		<span>----------------------------------</span>
+		<br>
+		<my-element param-value="{{user.name::value-changed}}" param-name="name"></my-element>
+		<my-element param-value="[[user.age]]" param-name="age"></my-element>
+		<my-element param-value="{{user.sex}}" param-name="sex"></my-element>
+		<my-element param-value="{{user.interest}}" param-name="interest"></my-element>
+		<br>aa
+		<span>+++++++++++++++++++++++++++++++</span>
+		<br>
+		<my-user user="{{user}}"></my-user>
+
+		<br>
+		<span>*******************************</span> 随机数:
+		<span>{{doThisOnce()}}</span>
+		<br>
+
+		<br>
+		<span>*******************************</span> 数组:
+		<div>[[arrayItem(myArray.*, 0, 'name')]]</div>
+		<div>[[arrayItem(myArray.*, 1, 'name')]]</div>
+		<br />
+	</template>
+	<script>
+		Polymer({
+			is: "data-bind",
+			properties: {
+				name: {
+					type: String,
+					notify: true,
+					observer: '_nameChanged'
+				},
+				age: {
+					type: Number,
+					notify: true
+				},
+				sex: {
+					type: String,
+					notify: false
+				},
+				interest: {
+					type: String,
+					notify: true,
+					//					value:'Looking',
+					readyOnly: true
+				},
+				user: {
+					type: Object,
+					value: {
+						name: 'Jarek',
+						age: 25,
+						sex: 'M',
+						interest: 'Looking'
+					}
+				},
+				myArray: {
+					type: Array,
+					value: [{
+						name: 'Bob'
+					}, {
+						name: 'Doug'
+					}]
+				}
+			},
+			_nameChanged: function(newValue, oldValue) {
+				console.log(arguments);
+			},
+			interestHandler: function(interest) {
+				
+				this._setInterest(interest);
+			},
+			_setInterest: function(interest) {
+				this.interest = interest;
+			},
+			doThisOnce: function() {
+				return Math.random();
+			},
+			// first argument is the change record for the array change,
+			// change.base is the array specified in the binding
+			arrayItem: function(change, index, path) {
+				// this.get(path, root) returns a value for a path
+				// relative to a root object.
+				return this.get(path, change.base[index]);
+			},
+			ready: function() {
+				// mutate the array
+				this.unshift('myArray', {
+					name: 'Susan'
+				});
+				// change a subproperty
+				this.set('myArray.1.name', 'Rupert');
+				
+				var a = [];
+				if(a)
+					var b = a.length;
+					console.log(b);
+				
+			}
+		})
+	</script>
+</dom-module>

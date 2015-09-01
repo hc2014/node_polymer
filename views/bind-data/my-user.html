@@ -1,0 +1,33 @@
+<dom-module id="my-user">
+	<template>
+		
+		
+		name:
+		<input is="iron-input" bind-value="{{user.name}}" />
+		<br /> age:
+		<input value="{{user.age::input}}">
+		<br /> sex:
+		<input value="{{user.sex::input}}">
+		<br /> interest:
+		<input is="iron-input" bind-value="{{user.interest}}" />
+		<br />
+		<span></span>
+		
+		<span>{{selfIntroduction(user)}}</span>
+		
+	</template>
+	<script>
+		Polymer({
+			is: "my-user",
+			properties: {
+				user:{
+					type:Object
+				}
+			},
+			selfIntroduction:function(user){
+				var introduction ="my name is "+user.name+" and age is "+user.age+" and sex is "+user.sex+" and I like "+user.interest;
+				return introduction;
+			}
+		})
+	</script>
+</dom-module>

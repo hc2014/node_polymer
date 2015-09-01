@@ -1,0 +1,64 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/paper-input/paper-input.html">
+<script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+<link rel="import" href="/bower_components/paper-styles/paper-styles.html">
+<link rel="import" href="/bower_components/paper-styles/demo-pages.html">
+<link rel="import" href="/bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="/bower_components/paper-button/paper-button.html">
+<link rel="import" href="/views/element-list.html">
+<link rel="import" href="/views/my-element.html">
+<link rel="import" href="/views/drag-me.html">
+<style is="custom-style">
+	paper-button.blue {
+            color: var(--paper-light-blue-500);
+            --paper-button-flat-focus-color: var(--paper-light-blue-50);
+        	}
+        	paper-button.blue:hover {
+            background: var(--paper-light-blue-50);
+        	}
+        	paper-button.ripple::shadow paper-ripple {
+            color: var(--paper-pink-a200);
+       	 }
+
+      	paper-button.ripple paper-ripple {
+		color: var(--paper-pink-a200);
+      	}
+      	paper-input.defult{
+      		width:200px;
+      	}
+</style>
+<fieldset><legend>第一个例子</legend>
+      <div style="float:left">
+            <paper-input  label="firstname"  class="defult"  id="txt_fir"></paper-input><br />
+            <paper-input  label="lastname"  class="defult" id="txt_last"></paper-input><br />
+            <paper-button tabindex="0" id="add" toggles raised  class="blue ripple">add</paper-button>
+      </div>
+      <div style="float:left;margin-left:20px;height:200px;width:200px;overflow:auto;"><employee-list id="t"></employee-list></div>
+</fieldset>
+<script>
+var t = document.querySelector('#t');
+var btn_add = document.querySelector('#add');
+var txt_fir = document.querySelector('#txt_fir');
+var txt_last = document.querySelector('#txt_last');
+t.employees = [
+            {first: 'Bob', last: 'Smith'},
+            {first: 'Sally', last: 'Johnson'}
+        ];
+t.addEventListener('dom-change', function() {
+   //domchangeEvent
+  });
+btn_add.click=function(){
+	//arr.push({ first: 'Jack', last: 'Aubrey' })	
+	t.push("employees",{ first: txt_fir.value, last: txt_last.value})
+}
+</script>
+<fieldset>
+  <legend>第二个例子</legend>
+  <my-element></my-element>
+</fieldset>
+<fieldset>
+  <legend>第三个例子</legend>
+  <drag-me></drag-me>
+</fieldset>
+<fieldset>第四个例子
+</fieldset>

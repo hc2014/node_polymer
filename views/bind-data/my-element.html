@@ -1,0 +1,20 @@
+<dom-module id="my-element">
+	<template>
+		<span>{{paramName}}</span>:<input is="iron-input" bind-value="{{paramValue}}" /> <br />
+	</template>
+	<script>
+		Polymer({
+			is: "my-element",
+			properties: {
+				paramValue: {
+					type: String,
+					notify: true
+				},
+				paramName:{
+					type:String,
+					notify:true
+				}
+			}
+		})
+	</script>
+</dom-module>
